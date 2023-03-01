@@ -2,6 +2,24 @@ import UmCpf from "./valida-cpf.js"
 import maiorDeIdade from "./valida-idade.js"
 
 const camposDoFormulario = document.querySelectorAll('[required]')
+const formulario = document.querySelector('[data-formulario]')
+
+formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const listaDeInformacoes =  {
+        "nome": evento.target.elements["nome"].value,
+        "email": evento.target.elements["email"].value,
+        "rg": evento.target.elements["rg"].value,
+        "cpf": evento.target.elements["cpf"].value,
+        "aniversario": evento.target.elements["aniversario"].value,
+    }
+
+    localStorage.setItem("cadastro", JSON.stringify(listaDeInformacoes))
+
+    window.location.href = './abrir-conta-form-2.html'
+})
+
 
 camposDoFormulario.forEach((campo) => {
     campo.addEventListener("blur", () => verificaCampos(campo))
@@ -76,7 +94,4 @@ function verificaCampos(campo){
         mensagemErro.textContent = ""
     }
 }
-
-
-
 
